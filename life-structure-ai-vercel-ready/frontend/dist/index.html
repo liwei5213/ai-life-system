@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>人生结构分析推演</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Microsoft YaHei", Arial, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(207, 165, 74, 0.22), transparent 34%),
+          linear-gradient(135deg, #090806 0%, #17120c 48%, #050504 100%);
+        color: #f8ecd0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+      }
+
+      .page {
+        width: 100%;
+        max-width: 760px;
+        background: rgba(20, 17, 13, 0.94);
+        border: 1px solid rgba(217, 183, 105, 0.58);
+        border-radius: 14px;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.46);
+        overflow: hidden;
+      }
+
+      .hero {
+        padding: 48px 38px 34px;
+        background:
+          linear-gradient(135deg, rgba(217, 183, 105, 0.2), transparent 42%),
+          #12100d;
+        color: #fffaf0;
+        border-bottom: 1px solid #d9c99f;
+      }
+
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 42px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: #d9c99f;
+        font-size: 16px;
+      }
+
+      .content {
+        padding: 34px 38px 38px;
+      }
+
+      .form {
+        display: grid;
+        gap: 18px;
+      }
+
+      .input-guidance {
+        padding: 20px;
+        border: 1px solid rgba(217, 183, 105, 0.5);
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(255, 247, 223, 0.09), rgba(217, 183, 105, 0.04));
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+      }
+
+      .input-guidance p {
+        margin: 0;
+        color: #f6e7bf;
+        line-height: 1.8;
+        font-size: 16px;
+      }
+
+      .input-guidance p + p {
+        margin-top: 8px;
+        color: #d9c99f;
+      }
+
+      .reflection {
+        display: grid;
+        gap: 16px;
+        padding: 20px;
+        border: 1px solid rgba(217, 183, 105, 0.38);
+        border-radius: 12px;
+        background: rgba(255, 250, 240, 0.06);
+      }
+
+      .reflection-intro {
+        margin: 0;
+        padding: 16px 18px;
+        border: 1px solid #c6a85a;
+        border-radius: 10px;
+        background: #1b1712;
+        color: #fff3d1;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.7;
+      }
+
+      .memory-card {
+        padding: 16px;
+        border: 1px solid rgba(217, 183, 105, 0.28);
+        border-radius: 10px;
+        background: rgba(255, 250, 240, 0.92);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      .memory-card p {
+        margin: 0 0 12px;
+        color: #241f18;
+        line-height: 1.7;
+        font-weight: 700;
+      }
+
+      .choice-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .choice {
+        position: relative;
+        display: block;
+        font-weight: 400;
+      }
+
+      .choice input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .choice span {
+        display: block;
+        padding: 10px 12px;
+        border: 1px solid #d8c9a7;
+        border-radius: 6px;
+        background: #fffaf0;
+        color: #3b3328;
+        cursor: pointer;
+      }
+
+      .choice input:checked + span {
+        border-color: #a88a42;
+        background: #1b1712;
+        color: #fff7df;
+      }
+
+      .gender-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .transition-note {
+        margin: 0;
+        padding: 13px 14px;
+        border-left: 4px solid #b8954d;
+        background: #fffaf0;
+        color: #4b3d22;
+        line-height: 1.7;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        color: #f7e8bd;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .field-hint {
+        color: #bda878;
+        font-size: 13px;
+        font-weight: 400;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid rgba(217, 183, 105, 0.56);
+        border-radius: 10px;
+        background: rgba(255, 250, 240, 0.96);
+        color: #171411;
+        font-size: 16px;
+        outline: none;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #a88a42;
+        box-shadow: 0 0 0 3px rgba(168, 138, 66, 0.16);
+      }
+
+      .birth-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
+        gap: 10px;
+      }
+
+      .truth-note {
+        color: #d9c99f;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      button {
+        width: fit-content;
+        min-width: 190px;
+        padding: 14px 22px;
+        border: 1px solid #d9b769;
+        border-radius: 999px;
+        background: #171411;
+        color: #fff7df;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 0 0 rgba(217, 183, 105, 0);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 22px rgba(217, 183, 105, 0.36);
+      }
+
+      button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+
+      .error {
+        margin: 16px 0 0;
+        color: #a33122;
+      }
+
+      .result {
+        margin-top: 28px;
+        border-top: 1px solid rgba(217, 183, 105, 0.34);
+        padding-top: 26px;
+      }
+
+      .section-title {
+        margin: 0 0 12px;
+        color: #d9b769;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .structure-value {
+        margin: 0 0 22px;
+        padding: 20px;
+        border: 1px solid rgba(217, 183, 105, 0.54);
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(255, 247, 223, 0.12), rgba(217, 183, 105, 0.04));
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 38px;
+        font-weight: 700;
+        color: #fff3d1;
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+      }
+
+      .preview {
+        margin: 0 0 24px;
+        padding: 20px;
+        border-left: 4px solid #b8954d;
+        border-radius: 10px;
+        background: rgba(255, 250, 240, 0.95);
+        color: #2d281f;
+        line-height: 1.8;
+        white-space: pre-wrap;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .preview-heading {
+        display: inline-block;
+        margin-top: 4px;
+        color: #171411;
+        font-weight: 700;
+        border-bottom: 1px solid #b8954d;
+      }
+
+      .preview-section-heading {
+        display: block;
+        margin: 18px 0 12px;
+        padding: 13px 14px;
+        border: 1px solid #d9b769;
+        border-left: 5px solid #b8954d;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #171411, #352915);
+        color: #fff7df;
+        box-shadow: 0 12px 24px rgba(23, 20, 17, 0.18);
+        white-space: normal;
+      }
+
+      .preview-section-heading strong {
+        display: block;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .preview-section-heading small {
+        display: block;
+        margin-top: 4px;
+        color: #e8d49a;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .preview-label {
+        color: #8a6d2f;
+        font-weight: 700;
+      }
+
+      .preview-list {
+        display: grid;
+        gap: 12px;
+        margin: 12px 0 14px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .preview-list li {
+        padding: 12px 14px;
+        border: 1px solid #eadbb2;
+        border-radius: 6px;
+        background: #fffaf0;
+      }
+
+      .preview-lock-hint {
+        display: block;
+        margin-top: 8px;
+        padding: 12px 14px;
+        border: 1px solid #dec78a;
+        border-radius: 6px;
+        background: #fff7df;
+        color: #3b2f18;
+        font-weight: 700;
+      }
+
+      .locked-box {
+        display: grid;
+        gap: 18px;
+        padding: 24px;
+        border: 1px solid #d9c99f;
+        border-radius: 14px;
+        background:
+          linear-gradient(135deg, rgba(217, 183, 105, 0.16), transparent 45%),
+          #191612;
+        color: #fff8e8;
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+      }
+
+      .locked-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .locked-list {
+        margin: 0;
+        padding-left: 20px;
+        color: #e8dcc3;
+        line-height: 1.9;
+      }
+
+      .conversion-card {
+        padding: 16px;
+        border: 1px solid rgba(217, 183, 105, 0.42);
+        border-radius: 8px;
+        background: rgba(255, 248, 232, 0.06);
+      }
+
+      .conversion-card p {
+        margin: 0 0 12px;
+        color: #fff1c8;
+        line-height: 1.7;
+        font-weight: 700;
+      }
+
+      .urgent-card {
+        padding: 18px;
+        border: 1px solid rgba(240, 213, 138, 0.62);
+        border-radius: 10px;
+        background: linear-gradient(135deg, rgba(240, 213, 138, 0.16), rgba(255, 248, 232, 0.05));
+      }
+
+      .urgent-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: #f0d58a;
+        font-size: 18px;
+      }
+
+      .urgent-card p {
+        margin: 0;
+        color: #fff1c8;
+        line-height: 1.75;
+        font-weight: 700;
+      }
+
+      .time-pressure {
+        margin-top: 12px;
+        padding: 11px 13px;
+        border-left: 4px solid #d9b769;
+        background: rgba(255, 247, 223, 0.1);
+        color: #e8dcc3;
+        font-size: 14px;
+      }
+
+      .locked-tag {
+        color: #d9b769;
+        font-weight: 700;
+      }
+
+      .gap-alert {
+        padding: 16px;
+        border: 1px solid #d9b769;
+        border-radius: 8px;
+        background: #fff7df;
+        color: #241d12;
+        line-height: 1.7;
+      }
+
+      .gap-alert strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .compare {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .compare-column {
+        padding: 16px;
+        border: 1px solid rgba(217, 183, 105, 0.38);
+        border-radius: 8px;
+        background: rgba(255, 250, 240, 0.06);
+      }
+
+      .compare-column h3 {
+        margin: 0 0 10px;
+        color: #d9b769;
+        font-size: 16px;
+      }
+
+      .compare-column ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #e8dcc3;
+        line-height: 1.8;
+      }
+
+      .conversion-note {
+        margin: 0;
+        padding: 12px 14px;
+        border-left: 4px solid #d9b769;
+        background: rgba(255, 247, 223, 0.1);
+        color: #fff1c8;
+        line-height: 1.7;
+        font-weight: 700;
+      }
+
+      .unlock-button {
+        background: linear-gradient(135deg, #f0d58a, #b88c37);
+        color: #18130d;
+        border-color: #d9b769;
+        width: 100%;
+        font-size: 16px;
+        animation: breatheGlow 2.4s ease-in-out infinite;
+      }
+
+      #submitButton {
+        animation: breatheDarkGlow 2.8s ease-in-out infinite;
+      }
+
+      @keyframes breatheGlow {
+        0%, 100% {
+          box-shadow: 0 0 16px rgba(217, 183, 105, 0.25);
+        }
+        50% {
+          box-shadow: 0 0 34px rgba(217, 183, 105, 0.58);
+        }
+      }
+
+      @keyframes breatheDarkGlow {
+        0%, 100% {
+          box-shadow: 0 0 12px rgba(217, 183, 105, 0.18);
+        }
+        50% {
+          box-shadow: 0 0 28px rgba(217, 183, 105, 0.42);
+        }
+      }
+
+      .full-report {
+        margin-top: 24px;
+        padding: 22px;
+        border: 1px solid #d9c99f;
+        border-radius: 8px;
+        background: #fffaf0;
+        color: #241f18;
+      }
+
+      .full-report h2 {
+        margin: 0 0 14px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+      }
+
+      .full-report pre {
+        margin: 0;
+        white-space: pre-wrap;
+        line-height: 1.8;
+        font-family: "Microsoft YaHei", Arial, sans-serif;
+      }
+
+      @media (max-width: 620px) {
+        body {
+          align-items: flex-start;
+          padding: 12px;
+        }
+
+        .page {
+          border-radius: 12px;
+        }
+
+        .hero {
+          padding: 34px 22px 26px;
+        }
+
+        .hero-top {
+          flex-direction: column;
+        }
+
+        h1 {
+          font-size: 34px;
+          line-height: 1.18;
+        }
+
+        .subtitle {
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
+        .content {
+          padding: 24px 18px 28px;
+        }
+
+        .input-guidance,
+        .reflection,
+        .locked-box {
+          padding: 16px;
+        }
+
+        .memory-card,
+        .preview,
+        .full-report {
+          padding: 14px;
+        }
+
+        .choice-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .compare {
+          grid-template-columns: 1fr;
+        }
+
+        .birth-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        button {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .structure-value {
+          padding: 16px;
+          font-size: 30px;
+          line-height: 1.25;
+        }
+      }
+
+      @media (max-width: 380px) {
+        h1 {
+          font-size: 30px;
+        }
+
+        .birth-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="hero-top">
+          <div>
+            <h1>人生结构分析推演</h1>
+            <p class="subtitle">基于结构模型的人生趋势解析</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="content">
+        <form class="form" id="analyzeForm">
+          <section class="input-guidance">
+            <p>人生并不随机，它在结构与节奏中进行。</p>
+          </section>
+
+          <section class="reflection">
+            <p class="reflection-intro">
+              开始之前，请先回想下你生命中可能经历的某些不经意的变化。
+            </p>
+
+            <div class="memory-card">
+              <p>有些阶段，生活的整体感受会悄悄变了，原因却不容易马上说清。你回忆中更接近哪一种？</p>
+              <div class="choice-grid">
+                <label class="choice"><input name="changeFeeling" type="radio" value="经常有" /><span>经常有</span></label>
+                <label class="choice"><input name="changeFeeling" type="radio" value="偶尔有" /><span>偶尔有</span></label>
+                <label class="choice"><input name="changeFeeling" type="radio" value="很少" /><span>很少</span></label>
+                <label class="choice"><input name="changeFeeling" type="radio" value="没注意过" /><span>没注意过</span></label>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p>是否有在某个时间里，突然发现以前喜欢吃的某个美食或者很喜欢的某种颜色现在没有什么感觉了？</p>
+              <div class="choice-grid">
+                <label class="choice"><input name="preferenceShift" type="radio" value="明显有" /><span>明显有</span></label>
+                <label class="choice"><input name="preferenceShift" type="radio" value="有但不确定原因" /><span>有但不确定原因</span></label>
+                <label class="choice"><input name="preferenceShift" type="radio" value="没有注意" /><span>没有注意</span></label>
+                <label class="choice"><input name="preferenceShift" type="radio" value="想不起来" /><span>想不起来</span></label>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p>如果只描述当下的生活状态，不急着解释原因，你更靠近哪一种感受？</p>
+              <div class="choice-grid">
+                <label class="choice"><input name="currentState" type="radio" value="稳定但缺少变化" /><span>稳定但缺少变化</span></label>
+                <label class="choice"><input name="currentState" type="radio" value="有变化但不确定方向" /><span>有变化但不确定方向</span></label>
+                <label class="choice"><input name="currentState" type="radio" value="正在转折期" /><span>正在转折期</span></label>
+                <label class="choice"><input name="currentState" type="radio" value="比较混乱" /><span>比较混乱</span></label>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p>当你回望过往，有没有某种熟悉的状态反复回来，好像人生在提醒你看见同一个模式？</p>
+              <div class="choice-grid">
+                <label class="choice"><input name="oldPattern" type="radio" value="会反复出现" /><span>会反复出现</span></label>
+                <label class="choice"><input name="oldPattern" type="radio" value="偶尔会重来" /><span>偶尔会重来</span></label>
+                <label class="choice"><input name="oldPattern" type="radio" value="不太明显" /><span>不太明显</span></label>
+                <label class="choice"><input name="oldPattern" type="radio" value="还没想过" /><span>还没想过</span></label>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p>你会经常回忆起很久没联系的朋友或者已逝的亲人吗？</p>
+              <div class="choice-grid">
+                <label class="choice"><input name="memoryConnection" type="radio" value="经常会" /><span>经常会</span></label>
+                <label class="choice"><input name="memoryConnection" type="radio" value="偶尔会" /><span>偶尔会</span></label>
+                <label class="choice"><input name="memoryConnection" type="radio" value="很少会" /><span>很少会</span></label>
+                <label class="choice"><input name="memoryConnection" type="radio" value="说不清" /><span>说不清</span></label>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p>跟很爱的人分手后，你的性格是不是发生了明显的变化？</p>
+              <div class="choice-grid">
+                <label class="choice"><input name="loveChange" type="radio" value="明显变化" /><span>明显变化</span></label>
+                <label class="choice"><input name="loveChange" type="radio" value="有些变化" /><span>有些变化</span></label>
+                <label class="choice"><input name="loveChange" type="radio" value="变化不大" /><span>变化不大</span></label>
+                <label class="choice"><input name="loveChange" type="radio" value="没有经历过" /><span>没有经历过</span></label>
+              </div>
+            </div>
+
+            <p class="transition-note" id="transitionNote" hidden>
+              你的回答已经记录，我们将结合你的行为变化模式生成人生结构分析。
+            </p>
+          </section>
+
+          <label>
+            你的出生时间（用于你的专属人生推演）
+            <span class="truth-note">请使用公历时间进行输入</span>
+            <div class="birth-grid">
+              <select id="birthYear" required></select>
+              <select id="birthMonth" required></select>
+              <select id="birthDay" required></select>
+              <select id="birthHour" required></select>
+              <select id="birthMinute" required></select>
+            </div>
+          </label>
+
+          <label>
+            性别
+            <span class="field-hint">辅助分析</span>
+            <div class="gender-options">
+              <label class="choice"><input name="gender" type="radio" value="男" checked /><span>男</span></label>
+              <label class="choice"><input name="gender" type="radio" value="女" /><span>女</span></label>
+            </div>
+          </label>
+
+          <button id="submitButton" type="submit">👉 开始解析我的人生结构</button>
+        </form>
+
+        <p class="error" id="error"></p>
+
+        <section class="result" id="result" hidden>
+          <p class="section-title">你的结构类型：</p>
+          <p class="structure-value" id="structure"></p>
+
+          <p class="section-title">免费分析：</p>
+          <p class="preview" id="report"></p>
+
+          <div class="locked-box" id="lockedBox" hidden>
+            <p class="locked-title">🔒 完整人生报告（未解锁）</p>
+
+            <div class="urgent-card">
+              <strong>🔥 关键提示</strong>
+              <p>你的当前人生结构，已经出现明显的阶段性变化信号</p>
+              <div class="time-pressure">本次分析基于实时结构模型，仅对当前输入有效</div>
+            </div>
+
+            <div class="conversion-card">
+              <p>你的人生结构中还存在3个未解析关键点：</p>
+              <ul class="locked-list">
+                <li>未来关键转折时间 <span class="locked-tag">（未开放）</span></li>
+                <li>情感模式循环原因 <span class="locked-tag">（未开放）</span></li>
+                <li>事业路径偏差点 <span class="locked-tag">（未开放）</span></li>
+              </ul>
+            </div>
+
+            <div class="gap-alert">
+              <strong>🔒 未解锁信息提示</strong>
+              更细的阶段变化、关系触发点与事业路径变量，会在完整报告中继续展开。
+            </div>
+
+            <div class="compare">
+              <div class="compare-column">
+                <h3>免费版</h3>
+                <ul>
+                  <li>基础结构判断</li>
+                  <li>简单解释</li>
+                </ul>
+              </div>
+              <div class="compare-column">
+                <h3>付费版</h3>
+                <ul>
+                  <li>未来3年关键节点</li>
+                  <li>情感模式解析</li>
+                  <li>事业路径建议</li>
+                  <li>风险提醒</li>
+                  <li>行动方向</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="conversion-note">
+              超过83%用户在查看完整报告后，对自己人生方向有重新理解
+            </p>
+            <p class="conversion-note">
+              你的人生结构正在进入一个关键变化阶段
+            </p>
+            <button class="unlock-button" type="button" id="unlockButton">
+              👉 查看我的人生关键转折点（¥29）
+            </button>
+          </div>
+
+          <section class="full-report" id="fullReportSection" hidden>
+            <h2>完整人生报告</h2>
+            <pre id="fullReport"></pre>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById("analyzeForm");
+      const birthYear = document.getElementById("birthYear");
+      const birthMonth = document.getElementById("birthMonth");
+      const birthDay = document.getElementById("birthDay");
+      const birthHour = document.getElementById("birthHour");
+      const birthMinute = document.getElementById("birthMinute");
+      const submitButton = document.getElementById("submitButton");
+      const result = document.getElementById("result");
+      const structure = document.getElementById("structure");
+      const report = document.getElementById("report");
+      const lockedBox = document.getElementById("lockedBox");
+      const unlockButton = document.getElementById("unlockButton");
+      const fullReportSection = document.getElementById("fullReportSection");
+      const fullReport = document.getElementById("fullReport");
+      const error = document.getElementById("error");
+      const transitionNote = document.getElementById("transitionNote");
+      let currentStructure = "";
+      const stateFieldNames = [
+        "changeFeeling",
+        "preferenceShift",
+        "currentState",
+        "oldPattern",
+        "memoryConnection",
+        "loveChange",
+      ];
+
+      initBirthSelectors();
+
+      const destinyPreview = {
+        "早发型结构":
+          "你的人生更像一条先打开局面、再逐渐校准方向的路径。前期容易被机会和变化推动，也可能在较早阶段经历自我突破；当经验逐渐沉淀后，方向感会更清楚，适合把早期试错转化为后期优势。",
+        "稳定积累型":
+          "你的人生属于慢慢蓄力的结构。前期可能不急于显现成果，更像是在暗中打磨根基；随着时间推进，能力、资源和判断会逐渐聚合，中后期更容易形成清晰而稳定的个人道路。",
+        "后发型结构":
+          "你的人生属于阶段性成长结构。前期容易在探索中反复确认自己，中后期会随着关键选择逐渐清晰；每一次转折都像命运给出的提示，适合顺着阶段变化完成自我升级。",
+        "波动成长型":
+          "你的人生带有在起伏中成长的节奏。某些阶段可能会先经历摇摆、调整或重新选择，但这些变化并不只是消耗，也可能成为你识别方向、建立内在稳定感的重要线索。",
+        "未知结构":
+          "当前信息还不足以形成清晰结构，但你的人生节奏仍可以从关键时间、选择和反复出现的模式中被看见。补充更完整的出生时间后，结构线索会更容易浮现。",
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        submitButton.disabled = true;
+        submitButton.textContent = "生成中...";
+        error.textContent = "";
+        result.hidden = true;
+        lockedBox.hidden = true;
+        fullReportSection.hidden = true;
+
+        try {
+          const birthTime = getBirthTime();
+          if (!birthTime) {
+            throw new Error("请完整选择真实的公历出生时间。");
+          }
+
+          const response = await fetchWithTimeout("/analyze", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              birth_time: birthTime,
+              gender: getCheckedValue("gender"),
+              psychology_state: getStateData(),
+            }),
+          }, 12000);
+
+          if (!response.ok) {
+            throw new Error("请求暂时没有成功：" + response.status);
+          }
+
+          const data = await response.json();
+          currentStructure = data.structure;
+          structure.textContent = data.structure;
+          report.innerHTML = formatPreviewReport(
+            buildNarrativeReport(data.structure, data.preview_report || destinyPreview[data.structure])
+          );
+          lockedBox.hidden = !data.locked_sections;
+          result.hidden = false;
+        } catch (err) {
+          error.textContent = err.message || "请求失败，请确认后端服务已启动。";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "👉 开始解析我的人生结构";
+        }
+      });
+
+      unlockButton.addEventListener("click", async () => {
+        unlockButton.disabled = true;
+        unlockButton.textContent = "正在为你生成完整人生结构报告...";
+        error.textContent = "";
+
+        try {
+          const psychologyState = getStateData();
+          localStorage.setItem(
+            "lifeStructurePendingUnlock",
+            JSON.stringify({
+              structure: currentStructure || structure.textContent,
+              birth_time: getBirthTime(),
+              gender: getCheckedValue("gender"),
+              psychology_state: psychologyState,
+            })
+          );
+          const payPageUrl = new URL("pay_qr.html", window.location.href);
+          payPageUrl.searchParams.set("return_url", window.location.href.split("?")[0]);
+          window.location.href = payPageUrl.toString();
+        } catch (err) {
+          error.textContent = err.message || "进入支付页失败，请稍后重试。";
+          unlockButton.disabled = false;
+          unlockButton.textContent = "👉 查看我的人生关键转折点（¥29）";
+        }
+      });
+
+      form.addEventListener("change", () => {
+        transitionNote.hidden = !stateFieldNames.every((name) =>
+          document.querySelector(`input[name="${name}"]:checked`)
+        );
+      });
+
+      function getStateData() {
+        return {
+          change_feeling: getCheckedValue("changeFeeling"),
+          preference_shift: getCheckedValue("preferenceShift"),
+          current_state: getCheckedValue("currentState"),
+          old_pattern: getCheckedValue("oldPattern"),
+          memory_connection: getCheckedValue("memoryConnection"),
+          love_change: getCheckedValue("loveChange"),
+        };
+      }
+
+      function getCheckedValue(name) {
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        return selected ? selected.value : "";
+      }
+
+      function initBirthSelectors() {
+        fillSelect(birthYear, "年", 1940, new Date().getFullYear());
+        fillSelect(birthMonth, "月", 1, 12);
+        fillSelect(birthHour, "时", 0, 23);
+        fillSelect(birthMinute, "分", 0, 59);
+        birthYear.addEventListener("change", updateBirthDays);
+        birthMonth.addEventListener("change", updateBirthDays);
+        updateBirthDays();
+      }
+
+      function fillSelect(select, suffix, start, end) {
+        select.innerHTML = `<option value="">${suffix}</option>`;
+        for (let value = start; value <= end; value += 1) {
+          const label = suffix === "分" || suffix === "时"
+            ? String(value).padStart(2, "0") + suffix
+            : value + suffix;
+          select.insertAdjacentHTML(
+            "beforeend",
+            `<option value="${value}">${label}</option>`
+          );
+        }
+      }
+
+      function updateBirthDays() {
+        const year = Number(birthYear.value || 2000);
+        const month = Number(birthMonth.value || 1);
+        const selectedDay = birthDay.value;
+        const days = new Date(year, month, 0).getDate();
+        birthDay.innerHTML = '<option value="">日</option>';
+        for (let day = 1; day <= days; day += 1) {
+          birthDay.insertAdjacentHTML(
+            "beforeend",
+            `<option value="${day}">${day}日</option>`
+          );
+        }
+        if (selectedDay && Number(selectedDay) <= days) {
+          birthDay.value = selectedDay;
+        }
+      }
+
+      function getBirthTime() {
+        const values = [
+          birthYear.value,
+          birthMonth.value,
+          birthDay.value,
+          birthHour.value,
+          birthMinute.value,
+        ];
+        if (values.some((value) => value === "")) {
+          return "";
+        }
+        return `${birthYear.value}-${pad2(birthMonth.value)}-${pad2(birthDay.value)} ${pad2(birthHour.value)}:${pad2(birthMinute.value)}`;
+      }
+
+      function pad2(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function buildNarrativeReport(structureName, text) {
+        const intros = {
+          "早发型结构":
+            "你的人生在较早阶段，往往更容易被变化、选择和行动推向前方。某些看似临时的尝试，可能正是你形成自身节奏的开始。",
+          "稳定积累型":
+            "你的人生在前期更像一段蓄力过程，很多变化不会立刻显现，却会在时间里慢慢沉淀成稳定的方向。",
+          "后发型结构":
+            "你的人生在某些阶段，容易出现明显的转折感。那些让你重新审视自己的时刻，可能正是结构开始变化的信号。",
+          "波动成长型":
+            "你的人生常常在起伏中重新校准方向。某些波动并不只是混乱，也可能是在提醒你看见真正适合自己的节奏。",
+          "未知结构":
+            "你的人生结构还需要更多线索被看见。即便如此，过往反复出现的状态，仍然可能透露出某种正在形成的节奏。",
+        };
+        return `${intros[structureName] || intros["未知结构"]}\n\n${text}`;
+      }
+
+      function formatPreviewReport(text) {
+        let escaped = renderReportHeadings(escapeHtml(text));
+        const heading = "已显现的关键线索：";
+        const lockHint =
+          "更具体的未来3年节奏、情感关键节点、事业突破点、风险提示与行动建议，会在完整报告中继续展开。";
+        const parts = escaped.split(heading);
+
+        if (parts.length === 1) {
+          return escaped.replace(
+            lockHint,
+            `<span class="preview-lock-hint">${lockHint}</span>`
+          );
+        }
+
+        const before = parts[0];
+        const afterHeading = parts.slice(1).join(heading);
+        const [linesPart, afterLines = ""] = afterHeading.split(
+          "免费版先为你呈现已经浮现出来的核心线索；"
+        );
+        const lines = linesPart
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line.startsWith("- "));
+        const list = lines
+          .map((line) => {
+            return `<li>${line
+              .replace("- 未来3年趋势线索：", '<span class="preview-label">未来3年趋势线索：</span>')
+              .replace("- 情感关键节点线索：", '<span class="preview-label">情感关键节点线索：</span>')
+              .replace("- 事业突破点线索：", '<span class="preview-label">事业突破点线索：</span>')}</li>`;
+          })
+          .join("");
+
+        const ending = `免费版先为你呈现已经浮现出来的核心线索；${afterLines}`.replace(
+          lockHint,
+          `<span class="preview-lock-hint">${lockHint}</span>`
+        );
+
+        return `${before}${renderSimplePreviewHeading(heading, "免费版先展示已经浮现的核心线索")}<ul class="preview-list">${list}</ul>${ending}`;
+      }
+
+      function renderReportHeadings(text) {
+        return text.replace(
+          /━━━━━━━━━━━━━━━━━━━━\n【([^】]+)】\n([^\n]+)\n━━━━━━━━━━━━━━━━━━━━/g,
+          '<span class="preview-section-heading"><strong>【$1】</strong><small>$2</small></span>'
+        );
+      }
+
+      function renderSimplePreviewHeading(title, subtitle) {
+        return `<span class="preview-section-heading"><strong>${title}</strong><small>${subtitle}</small></span>`;
+      }
+
+      async function fetchWithTimeout(url, options, timeout = 12000) {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), timeout);
+
+        try {
+          return await fetch(url, {
+            ...options,
+            signal: controller.signal,
+          });
+        } catch (err) {
+          if (err.name === "AbortError") {
+            throw new Error("生成时间过长，请确认后端服务正常运行后再试。");
+          }
+          throw err;
+        } finally {
+          window.clearTimeout(timer);
+        }
+      }
+
+      function escapeHtml(text) {
+        return text
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      async function handlePaidReturn() {
+        const params = new URLSearchParams(window.location.search);
+        const paid = params.get("paid");
+        const orderId = params.get("order_id");
+
+        if (paid !== "1" || !orderId) {
+          return;
+        }
+
+        const pending = JSON.parse(
+          localStorage.getItem("lifeStructurePendingUnlock") || "{}"
+        );
+        const unlockStructure = pending.structure || currentStructure;
+
+        if (!unlockStructure) {
+          error.textContent = "支付成功，但没有找到本次结构信息，请重新生成后查看完整报告。";
+          return;
+        }
+
+        structure.textContent = unlockStructure;
+        result.hidden = false;
+        lockedBox.hidden = true;
+        fullReportSection.hidden = false;
+        fullReport.textContent = "完整报告生成中...";
+
+        try {
+          const response = await fetchWithTimeout("/unlock_report", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              structure: unlockStructure,
+              birth_time: pending.birth_time || "",
+              gender: pending.gender || "",
+              psychology_state: pending.psychology_state || {},
+              order_id: orderId,
+              payment_status: "paid",
+            }),
+          }, 20000);
+
+          if (!response.ok) {
+            throw new Error("完整报告解锁失败：" + response.status);
+          }
+
+          const data = await response.json();
+          fullReport.textContent = data.full_report;
+          localStorage.removeItem("lifeStructurePendingUnlock");
+        } catch (err) {
+          error.textContent = err.message || "完整报告解锁失败，请稍后重试。";
+          fullReportSection.hidden = true;
+        }
+      }
+
+      handlePaidReturn();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/analyze",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/unlock_report",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/content/generate",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/content/batch_generate",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/create_order",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/pay/create_order",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/wxpay/create_order",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/pay/h5",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/pay",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/pay/confirm",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/confirm_pay",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/pay/notify",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/wxpay/notify",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/content-generator",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/content_generator.html",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/health",
+      "destination": "/api/index.py"
+    }
+  ]
+}
